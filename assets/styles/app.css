@@ -1,5 +1,7 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "custom.css";
 
+html,
 body {
-    background-color: skyblue;
+    height: 100%;
 }

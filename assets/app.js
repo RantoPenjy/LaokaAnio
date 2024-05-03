@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
  * which should already be in your base.html.twig.
  */
 import './styles/app.css';
+import './styles/custom.css';
 
 // Fontawesome plugin
 require('@fortawesome/fontawesome-free/css/all.min.css');
