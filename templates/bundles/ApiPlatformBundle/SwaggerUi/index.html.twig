@@ -58,19 +58,27 @@
 
             .project-logo {
                 position: fixed;
+                display: flex;
+                align-items: baseline;
                 padding: 5px 10px;
                 font-family: sans-serif;
                 font-weight: bold;
                 font-size: 24px;
                 text-decoration: none;
-                color: black;
+                color: #292d32;
                 top: 15px;
                 left: 40px;
                 z-index: 1000;
             }
 
             .project-logo:hover {
-                color: #343434;
+
+            }
+
+            .project-logo img {
+                width: 24px;
+                margin-right: 10px;
+                filter: brightness(0) saturate(100%) invert(11%) sepia(22%) saturate(434%) hue-rotate(173deg) brightness(93%) contrast(83%);
             }
         </style>
     {% endblock %}
@@ -122,6 +130,7 @@
 {% block header %}
     <header>
         <a class="project-logo" href="{{ path('app_home') }}">
+            <img src="{{ asset('/images/home-icon.svg', assetPackage) }}" alt="Home">
             LAOKA ANIO
         </a>
         <div class="developer-warning">
