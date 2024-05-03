@@ -5,10 +5,7 @@
 
         <div class="container d-flex justify-content-center align-items-center h-100">
             <div class="text-center">
-                <h6>Tongasoa eto amin'ny</h6>
-                <h1 id="welcome_name" class="fw-bold animate__animated animate__zoomIn">LAOKA ANIO</h1>
-
-                <h4>
+                <h4 id="date">
                     {% for mlg in malagasy_day %}
                         {% if day == mlg.name %}
                             {{ mlg.traduction }}
@@ -22,6 +19,10 @@
                     {% endfor %}
                     {{ year }}
                 </h4>
+
+                <h6>Tongasoa eto amin'ny</h6>
+                <h1 id="welcome_name" class="fw-bold animate__animated animate__zoomIn">LAOKA ANIO</h1>
+
                 <p class="mt-3">Leo ny mitady laoka isan'andro? Tsindrio ny bokotra</p>
                 <a type="button" class="btn btn-primary rounded-5 mb-3" style="width: 300px" id="randomBtn">
                     <span id="randomBtnText">Hisafidy</span>
@@ -31,7 +32,7 @@
                 </a>
                 <h2 class="mb-3" id="randomResult">Initial</h2>
                 <p>
-                    <a id="showRecipeLink" href="" class="text-decoration-none mt-3">Hijery ny fomba fikarakarana
+                    <a id="showRecipeLink" href="" class="text-decoration-none text-white">Hijery ny fomba fikarakarana
                         (recette)</a>
                 </p>
             </div>

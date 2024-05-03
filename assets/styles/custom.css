@@ -17,14 +17,29 @@
   color: #dedede;
 }
 
+#date {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 #randomResult{
   opacity: 0;
   cursor: default;
 }
 
 #showRecipeLink{
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  transform: translateX(-50%);
   opacity:0;
   cursor: default;
+}
+
+#showRecipeLink:hover {
+  color: #0D6EFC;
 }
 
 #welcome_name{
