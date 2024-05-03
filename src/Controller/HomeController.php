@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Constant\DateConstant;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,9 +14,25 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         setlocale(LC_TIME, NULL);
+        $dateNow = new DateTime('now');
+        $timestamp = $dateNow->getTimestamp();
+//        $formattedDate = date('l d F Y', $timestamp);
+        $day = date("l", $timestamp);
+        $date = date("d", $timestamp);
+        $month = date("F", $timestamp);
+        $year = date("Y", $timestamp);
+        $malagasy_day = DateConstant::MALAGASY_DAY;
+        $malagasy_month = DateConstant::MALAGASY_MONTH;
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
+//            'date'=>$formattedDate,
+            'day'=>$day,
+            'date'=>$date,
+            'year'=>$year,
+            'month'=>$month,
+            'malagasy_day'=>$malagasy_day,
+            'malagasy_month'=>$malagasy_month
         ]);
     }
 }

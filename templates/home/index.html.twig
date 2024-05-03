@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tongasoa eto amin'ny Laoka Anio{% endblock %}
+
+{% block body %}
+    <section id="background" style="background-image: url('{{ asset('images/LAOKA_ANIO_BCG.jpg') }}')">
+
+        <div class="container d-flex justify-content-center align-items-center h-100">
+            <div class="text-center">
+                <h6>Tongasoa eto amin'ny</h6>
+                <h1 id="welcome_name" class="fw-bold animate__animated animate__zoomIn">LAOKA ANIO</h1>
+
+                <h4>
+                    {% for mlg in malagasy_day %}
+                        {% if day == mlg.name %}
+                            {{ mlg.traduction }}
+                        {% endif %}
+                    {% endfor %}
+                    {{ date }}
+                    {% for mlg in malagasy_month %}
+                        {% if month == mlg.name %}
+                            {{ mlg.traduction }}
+                        {% endif %}
+                    {% endfor %}
+                    {{ year }}
+                </h4>
+                <p class="mt-3">Leo ny mitady laoka isan'andro? Tsindrio ny bokotra</p>
+                <a type="button" class="btn btn-primary rounded-5 mb-3" style="width: 300px" id="randomBtn">
+                    <span id="randomBtnText">Hisafidy</span>
+                    <div id="randomBtnSpinner" class="spinner-border spinner-border-sm text-light" hidden>
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </a>
+                <h2 class="mb-3" id="randomResult">Initial</h2>
+                <p>
+                    <a id="showRecipeLink" href="" class="text-decoration-none mt-3">Hijery ny fomba fikarakarana
+                        (recette)</a>
+                </p>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
