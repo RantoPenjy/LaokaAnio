@@ -24,12 +24,12 @@ class Viande
     /**
      * @var Collection<int, Plat>
      */
-    #[ORM\ManyToMany(targetEntity: Plat::class, mappedBy: 'r_viande')]
-    private Collection $r_plats;
+    #[ORM\ManyToMany(targetEntity: Plat::class, mappedBy: 'viandes')]
+    private Collection $plats;
 
     public function __construct()
     {
-        $this->r_plats = new ArrayCollection();
+        $this->plats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,25 +64,25 @@ class Viande
     /**
      * @return Collection<int, Plat>
      */
-    public function getRPlats(): Collection
+    public function getPlats(): Collection
     {
-        return $this->r_plats;
+        return $this->plats;
     }
 
-    public function addRPlat(Plat $rPlat): static
+    public function addPlat(Plat $plat): static
     {
-        if (!$this->r_plats->contains($rPlat)) {
-            $this->r_plats->add($rPlat);
-            $rPlat->addRViande($this);
+        if (!$this->plats->contains($plat)) {
+            $this->plats->add($plat);
+            $plat->addViande($this);
         }
 
         return $this;
     }
 
-    public function removeRPlat(Plat $rPlat): static
+    public function removePlat(Plat $plat): static
     {
-        if ($this->r_plats->removeElement($rPlat)) {
-            $rPlat->removeRViande($this);
+        if ($this->plats->removeElement($plat)) {
+            $plat->removeViande($this);
         }
 
         return $this;

@@ -16,17 +16,17 @@ class DayType
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $day_type = null;
+    private ?string $name = null;
 
     /**
      * @var Collection<int, Plat>
      */
-    #[ORM\OneToMany(targetEntity: Plat::class, mappedBy: 'r_day')]
-    private Collection $r_plats;
+    #[ORM\OneToMany(targetEntity: Plat::class, mappedBy: 'day_type')]
+    private Collection $plats;
 
     public function __construct()
     {
-        $this->r_plats = new ArrayCollection();
+        $this->plats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,14 +34,14 @@ class DayType
         return $this->id;
     }
 
-    public function getDayType(): ?string
+    public function getName(): ?string
     {
-        return $this->day_type;
+        return $this->name;
     }
 
-    public function setDayType(string $day_type): static
+    public function setName(string $name): static
     {
-        $this->day_type = $day_type;
+        $this->name = $name;
 
         return $this;
     }
@@ -49,27 +49,27 @@ class DayType
     /**
      * @return Collection<int, Plat>
      */
-    public function getRPlats(): Collection
+    public function getPlats(): Collection
     {
-        return $this->r_plats;
+        return $this->plats;
     }
 
-    public function addRPlat(Plat $rPlat): static
+    public function addPlat(Plat $plat): static
     {
-        if (!$this->r_plats->contains($rPlat)) {
-            $this->r_plats->add($rPlat);
-            $rPlat->setRDay($this);
+        if (!$this->plats->contains($plat)) {
+            $this->plats->add($plat);
+            $plat->setDayType($this);
         }
 
         return $this;
     }
 
-    public function removeRPlat(Plat $rPlat): static
+    public function removePlat(Plat $plat): static
     {
-        if ($this->r_plats->removeElement($rPlat)) {
+        if ($this->plats->removeElement($plat)) {
             // set the owning side to null (unless already changed)
-            if ($rPlat->getRDay() === $this) {
-                $rPlat->setRDay(null);
+            if ($plat->getDayType() === $this) {
+                $plat->setDayType(null);
             }
         }
 

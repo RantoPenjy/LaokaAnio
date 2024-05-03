@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\PlatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
+#[ApiResource]
 class Plat
 {
     #[ORM\Id]
@@ -21,26 +23,25 @@ class Plat
     #[ORM\Column]
     private ?int $min_price_per_person = null;
 
-    #[ORM\ManyToOne(inversedBy: 'r_plats')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?DayType $r_day = null;
+    #[ORM\ManyToOne(inversedBy: 'plats')]
+    private ?DayType $day_type = null;
 
     /**
      * @var Collection<int, Viande>
      */
-    #[ORM\ManyToMany(targetEntity: Viande::class, inversedBy: 'r_plats')]
-    private Collection $r_viande;
+    #[ORM\ManyToMany(targetEntity: Viande::class, inversedBy: 'plats')]
+    private Collection $viandes;
 
     /**
      * @var Collection<int, NonViande>
      */
-    #[ORM\ManyToMany(targetEntity: NonViande::class, inversedBy: 'r_plats')]
-    private Collection $r_non_viande;
+    #[ORM\ManyToMany(targetEntity: NonViande::class, inversedBy: 'plats')]
+    private Collection $non_viandes;
 
     public function __construct()
     {
-        $this->r_viande = new ArrayCollection();
-        $this->r_non_viande = new ArrayCollection();
+        $this->viandes = new ArrayCollection();
+        $this->non_viandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,14 +73,14 @@ class Plat
         return $this;
     }
 
-    public function getRDay(): ?DayType
+    public function getDayType(): ?DayType
     {
-        return $this->r_day;
+        return $this->day_type;
     }
 
-    public function setRDay(?DayType $r_day): static
+    public function setDayType(?DayType $day_type): static
     {
-        $this->r_day = $r_day;
+        $this->day_type = $day_type;
 
         return $this;
     }
@@ -87,23 +88,23 @@ class Plat
     /**
      * @return Collection<int, Viande>
      */
-    public function getRViande(): Collection
+    public function getViandes(): Collection
     {
-        return $this->r_viande;
+        return $this->viandes;
     }
 
-    public function addRViande(Viande $rViande): static
+    public function addViande(Viande $viande): static
     {
-        if (!$this->r_viande->contains($rViande)) {
-            $this->r_viande->add($rViande);
+        if (!$this->viandes->contains($viande)) {
+            $this->viandes->add($viande);
         }
 
         return $this;
     }
 
-    public function removeRViande(Viande $rViande): static
+    public function removeViande(Viande $viande): static
     {
-        $this->r_viande->removeElement($rViande);
+        $this->viandes->removeElement($viande);
 
         return $this;
     }
@@ -111,23 +112,23 @@ class Plat
     /**
      * @return Collection<int, NonViande>
      */
-    public function getRNonViande(): Collection
+    public function getNonViandes(): Collection
     {
-        return $this->r_non_viande;
+        return $this->non_viandes;
     }
 
-    public function addRNonViande(NonViande $rNonViande): static
+    public function addNonViande(NonViande $nonViande): static
     {
-        if (!$this->r_non_viande->contains($rNonViande)) {
-            $this->r_non_viande->add($rNonViande);
+        if (!$this->non_viandes->contains($nonViande)) {
+            $this->non_viandes->add($nonViande);
         }
 
         return $this;
     }
 
-    public function removeRNonViande(NonViande $rNonViande): static
+    public function removeNonViande(NonViande $nonViande): static
     {
-        $this->r_non_viande->removeElement($rNonViande);
+        $this->non_viandes->removeElement($nonViande);
 
         return $this;
     }

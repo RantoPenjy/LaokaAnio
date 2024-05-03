@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\RecetteRepository;
+use App\Repository\RecipeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RecetteRepository::class)]
-class Recette
+#[ORM\Entity(repositoryClass: RecipeRepository::class)]
+class Recipe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class Recette
     private ?string $recipe_text = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Plat $r_plats = null;
+    private ?Plat $plat = null;
 
     public function getId(): ?int
     {
@@ -37,14 +37,14 @@ class Recette
         return $this;
     }
 
-    public function getRPlats(): ?Plat
+    public function getPlat(): ?Plat
     {
-        return $this->r_plats;
+        return $this->plat;
     }
 
-    public function setRPlats(?Plat $r_plats): static
+    public function setPlat(?Plat $plat): static
     {
-        $this->r_plats = $r_plats;
+        $this->plat = $plat;
 
         return $this;
     }
