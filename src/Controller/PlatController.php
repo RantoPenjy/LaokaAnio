@@ -31,7 +31,7 @@ class PlatController extends AbstractController
 
         $id_day = $holiday ? 3 : ($day != 'Sunday' ? 1 : 2);
 
-        $plat = $platRepository->findBy(['r_day' => $id_day]);
+        $plat = $platRepository->findBy(['day_type' => $id_day]);
         # shuffle all data
         # shuffle($plat);
 
