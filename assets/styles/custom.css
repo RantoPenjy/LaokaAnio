@@ -1,0 +1,32 @@
+#background{
+  height: 100vh;
+  background-color: transparent !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Pour fixer l'image en arrière-plan si nécessaire */
+  background-position: center center;
+  color: #fff;
+  object-fit: contain;
+}
+
+.languages a{
+  color: #fefefe;
+}
+
+.languages a:hover{
+  color: #dedede;
+}
+
+#randomResult{
+  opacity: 0;
+  cursor: default;
+}
+
+#showRecipeLink{
+  opacity:0;
+  cursor: default;
+}
+
+#welcome_name{
+  font-size: 72px;
+}
