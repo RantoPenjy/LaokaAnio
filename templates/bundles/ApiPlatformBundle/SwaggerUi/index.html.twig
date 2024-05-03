@@ -30,7 +30,7 @@
 
             header #logo {
                 position: fixed;
-                top : 35px;
+                top: 35px;
                 right: 40px;
                 z-index: 102;
                 transform: translateY(-50%);
@@ -40,6 +40,38 @@
                 height: 50px;
                 background: transparent;
             }
+
+            .developer-warning {
+                position: fixed;
+                color: white;
+                background-color: rgba(255, 0, 0, 0.86);
+                font-family: sans-serif;
+                font-weight: bold;
+                font-size: 24px;
+                padding: 5px 10px;
+                border-radius: 5px;
+                top: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1000;
+            }
+
+            .project-logo {
+                position: fixed;
+                padding: 5px 10px;
+                font-family: sans-serif;
+                font-weight: bold;
+                font-size: 24px;
+                text-decoration: none;
+                color: black;
+                top: 15px;
+                left: 40px;
+                z-index: 1000;
+            }
+
+            .project-logo:hover {
+                color: #343434;
+            }
         </style>
     {% endblock %}
 
@@ -47,7 +79,8 @@
 
     {% block head_javascript %}
         {# json_encode(65) is for JSON_UNESCAPED_SLASHES|JSON_HEX_TAG to avoid JS XSS #}
-        <script id="swagger-data" type="application/json">{{ swagger_data|merge(oauth_data)|json_encode(65)|raw }}</script>
+        <script id="swagger-data"
+                type="application/json">{{ swagger_data|merge(oauth_data)|json_encode(65)|raw }}</script>
     {% endblock %}
 </head>
 
@@ -88,8 +121,14 @@
 
 {% block header %}
     <header>
+        <a class="project-logo" href="{{ path('app_home') }}">
+            LAOKA ANIO
+        </a>
+        <div class="developer-warning">
+            DEVELOPERS ONLY
+        </div>
         <a id="logo" href="https://github.com/RantoPenjy">
-            <img src="{{ asset('/images/github.png', assetPackage) }}" alt="API Platform">
+            <img src="{{ asset('/images/github.png', assetPackage) }}" alt="Github account">
         </a>
     </header>
 {% endblock %}
@@ -106,10 +145,15 @@
             <br>
             Other API docs:
             {% set active_ui = app.request.get('ui', 'swagger_ui') %}
-            {% if swaggerUiEnabled and active_ui != 'swagger_ui' %}<a href="{{ path('api_doc') }}">Swagger UI</a>{% endif %}
-            {% if reDocEnabled and active_ui != 're_doc' %}<a href="{{ path('api_doc', {'ui': 're_doc'}) }}">ReDoc</a>{% endif %}
-            {% if not graphQlEnabled or graphiQlEnabled %}<a {% if graphiQlEnabled %}href="{{ path('api_graphql_graphiql') }}"{% endif %} class="graphiql-link">GraphiQL</a>{% endif %}
-            {% if graphQlPlaygroundEnabled %}<a href="{{ path('api_graphql_graphql_playground') }}">GraphQL Playground (deprecated)</a>{% endif %}
+            {% if swaggerUiEnabled and active_ui != 'swagger_ui' %}<a href="{{ path('api_doc') }}">Swagger
+                UI</a>{% endif %}
+            {% if reDocEnabled and active_ui != 're_doc' %}<a href="{{ path('api_doc', {'ui': 're_doc'}) }}">
+                    ReDoc</a>{% endif %}
+            {% if not graphQlEnabled or graphiQlEnabled %}<a
+                {% if graphiQlEnabled %}href="{{ path('api_graphql_graphiql') }}"{% endif %} class="graphiql-link">
+                    GraphiQL</a>{% endif %}
+            {% if graphQlPlaygroundEnabled %}<a href="{{ path('api_graphql_graphql_playground') }}">GraphQL Playground
+                (deprecated)</a>{% endif %}
         </div>
     </div>
 </div>

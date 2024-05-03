@@ -3,6 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
 use App\Repository\PlatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,6 +16,12 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
 #[ApiResource]
+#[GetCollection]
+#[Get]
+#[Post(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
+#[Patch(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
+#[Put(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
+#[Delete(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
 class Plat
 {
     #[ORM\Id]
