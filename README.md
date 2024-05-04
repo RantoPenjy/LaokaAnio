@@ -59,7 +59,8 @@ It had a simple display made with Bootstrap and use the DataTable to show all di
 - To configure the database connection, edit the .env file.
 - To configure the application settings, edit the config/packages/app.yaml file.
 
-## For Developers who want to check the usage of API through the API Platform:
+## For Developers: 
+Who want to check the usage of API through the API Platform:
 - Access the API Platform interface through this url
 ```bash
 127.0.0.1:8000/api
