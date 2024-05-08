@@ -21,6 +21,7 @@
   position: absolute;
   top: 5%;
   left: 50%;
+  line-height: 35px;
   transform: translateX(-50%);
 }
 

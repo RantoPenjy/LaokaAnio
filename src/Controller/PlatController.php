@@ -25,7 +25,7 @@ class PlatController extends AbstractController
         $date_now = new DateTime('now');
         $date_now->setTimezone(new \DateTimeZone('Africa/Nairobi'));
 
-        $holidays = DateConstant::malagasy_holidays();
+        $holidays = DateConstant::holidays();
         $holiday = in_array($date_now, $holidays);
 
         $id_day = $holiday ? 3 : ($day != 'Sunday' ? 1 : 2);
