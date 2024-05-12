@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Viande index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Viande index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Min_price_per_person</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for viande in viandes %}
+                <tr>
+                    <td>{{ viande.id }}</td>
+                    <td>{{ viande.name }}</td>
+                    <td>{{ viande.minPricePerPerson }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_viande_show', {'id': viande.id}) }}">
+                            Show
+                        </a>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_viande_edit', {'id': viande.id}) }}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-outline-primary" href="{{ path('app_viande_new') }}">Create new</a>
+    </div>
+{% endblock %}

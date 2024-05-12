@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NonViande{% endblock %}
+
+{% block body %}
+    <h1>NonViande</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ non_viande.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ non_viande.name }}</td>
+            </tr>
+            <tr>
+                <th>Min_price_per_person</th>
+                <td>{{ non_viande.minPricePerPerson }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_non_viande_index') }}">back to list</a>
+
+    <a href="{{ path('app_non_viande_edit', {'id': non_viande.id}) }}">edit</a>
+
+    {{ include('non_viande/_delete_form.html.twig') }}
+{% endblock %}

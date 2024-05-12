@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit NonViande{% endblock %}
+
+{% block body %}
+    <h1>Edit NonViande</h1>
+
+    {{ include('non_viande/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_non_viande_index') }}">back to list</a>
+
+    {{ include('non_viande/_delete_form.html.twig') }}
+{% endblock %}

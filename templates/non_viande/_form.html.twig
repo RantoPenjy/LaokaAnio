@@ -1,0 +1,20 @@
+{{ form_start(form) }}
+    <div class="row form-group mb-3">
+        <div class="col-xxl-12 d-flex align-self-start mb-2">
+            {{ form_label(form.name, "Anaran'ny laoka") }}
+        </div>
+        <div class="col-xxl-12">
+            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': "Ampidiro ny anaran'ny laoka"}}) }}
+        </div>
+    </div>
+    <div class="row form-group mb-3">
+        <div class="col-xxl-12 d-flex align-self-start mb-2">
+            {{ form_label(form.min_price_per_person, "Anaran'ny laoka") }}
+        </div>
+        <div class="col-xxl-12">
+            {{ form_widget(form.min_price_per_person, {'attr': {'class': 'form-control', 'placeholder': "Ampidiro ny vidiny"}}) }}
+        </div>
+    </div>
+{# { form_widget(form) }}#}
+ <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

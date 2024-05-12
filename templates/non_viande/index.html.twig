@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NonViande index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>NonViande index</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Min_price_per_person</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for non_viande in non_viandes %}
+                <tr>
+                    <td>{{ non_viande.id }}</td>
+                    <td>{{ non_viande.name }}</td>
+                    <td>{{ non_viande.minPricePerPerson }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_viande_show', {'id': viande.id}) }}">
+                            Show
+                        </a>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_viande_edit', {'id': viande.id}) }}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a class="btn btn-outline-primary" href="{{ path('app_non_viande_new') }}">Create new</a>
+    </div>
+{% endblock %}

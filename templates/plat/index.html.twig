@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Plat index{% endblock %}
+
+{% block body %}
+    <div class="container h-100 justify-content-center align-items-center">
+        <h1>Plat index</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Min_price_per_person</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for plat in plats %}
+                <tr>
+                    <td>{{ plat.id }}</td>
+                    <td>{{ plat.name }}</td>
+                    <td>{{ plat.minPricePerPerson }}</td>
+                    <td>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_plat_show', {'id': plat.id}) }}">
+                            Show
+                        </a>
+                        <a class="btn btn-sm btn-secondary" href="{{ path('app_plat_edit', {'id': plat.id}) }}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn btn-outline-primary" href="{{ path('app_plat_new') }}">Create new</a>
+    </div>
+
+
+{% endblock %}

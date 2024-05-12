@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Plat{% endblock %}
+
+{% block body %}
+    <div class="container d-flex justify-content-center h-100 align-items-center">
+        <div>
+            <h1>Create new Plat</h1>
+
+            {{ include('plat/_form.html.twig') }}
+
+            <a class="btn btn-outline-primary" href="{{ path('app_plat_index') }}">back to list</a>
+        </div>
+    </div>
+{% endblock %}
