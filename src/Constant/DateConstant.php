@@ -135,7 +135,7 @@ class DateConstant
     private static function getPentecostDate(): \DateTime
     {
         return (clone(self::getEasterDate()))
-            ->add(new \DateInterval('P49D'));
+            ->add(new \DateInterval('P50D'));
     }
 
     private static function getAscensionDate(): \DateTime
@@ -183,15 +183,15 @@ class DateConstant
     public static function holidays(): array
     {
         return [
-            'Easter' => self::getEasterDate(),
-            'Pentecost' => self::getPentecostDate(),
-            'Ascension' => self::getAscensionDate(),
-            'Assomption' => self::getAssomptionDate(),
-            'Christmas' => self::getChristmasDate(),
-            'NewYear' => self::getNewYearDate(),
-            'MalagasyMartyr' => self::getMalagasyMartyrDate(),
-            'MalagasyIndependenceDay' => self::getMalagasyIndependenceDate(),
-            'Toussaint' => self::getToussaintDate()
+            'Easter' => (self::getEasterDate())->format('Y-m-d'),
+            'Pentecost' => (self::getPentecostDate())->format('Y-m-d'),
+            'Ascension' => (self::getAscensionDate())->format('Y-m-d'),
+            'Assomption' => (self::getAssomptionDate())->format('Y-m-d'),
+            'Christmas' => (self::getChristmasDate())->format('Y-m-d'),
+            'NewYear' => (self::getNewYearDate())->format('Y-m-d'),
+            'MalagasyMartyr' => (self::getMalagasyMartyrDate())->format('Y-m-d'),
+            'MalagasyIndependenceDay' => (self::getMalagasyIndependenceDate())->format('Y-m-d'),
+            'Toussaint' => (self::getToussaintDate())->format('Y-m-d')
         ];
     }
 }

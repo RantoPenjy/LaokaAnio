@@ -8,6 +8,7 @@ use App\Form\PlatType;
 use App\Repository\PlatRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,8 +22,9 @@ class PlatController extends AbstractController
     {
         setlocale(LC_TIME, NULL);
         $day = date('l');
-        $date_now = new DateTime('now');
-        $date_now->setTimezone(new \DateTimeZone('Africa/Nairobi'));
+        $date_now = (new DateTime('now'))
+            ->setTimezone(new \DateTimeZone('Africa/Nairobi'))
+            ->format('Y-m-d');
 
         $holidays = DateConstant::holidays();
         $holiday = in_array($date_now, $holidays);
@@ -30,8 +32,8 @@ class PlatController extends AbstractController
         $id_day = $holiday ? 3 : ($day != 'Sunday' ? 1 : 2);
 
         $plat = $platRepository->findBy(['day_type' => $id_day]);
-        # shuffle all data
-        # shuffle($plat);
+
+        if (!$plat) : return $this->json([]); endif;
 
         # get a random number for the index
         $random_index = rand(0, count($plat)-1);

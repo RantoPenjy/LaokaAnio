@@ -14,13 +14,12 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         setlocale(LC_TIME, NULL);
-        $dateNow = new DateTime('now');
-        $timestamp = $dateNow->getTimestamp();
-//        $formattedDate = date('l d F Y', $timestamp);
-        $day = date("l", $timestamp);
-        $date = date("d", $timestamp);
-        $month = date("F", $timestamp);
-        $year = date("Y", $timestamp);
+        $date_now = (new DateTime('now'))
+            ->setTimezone(new \DateTimeZone('Africa/Nairobi'));
+        $day = $date_now->format('l');
+        $date = $date_now->format('d');
+        $month = $date_now->format('F');
+        $year = $date_now->format('Y');
         $malagasy_day = DateConstant::MALAGASY_DAY;
         $malagasy_month = DateConstant::MALAGASY_MONTH;
         $malagasy_holidays = DateConstant::MALAGASY_HOLIDAYS;
@@ -29,7 +28,8 @@ class HomeController extends AbstractController
         $holiday_greeting = '';
 
         foreach ($holidays as $key => $holiday) {
-            if ($holiday == $dateNow) {
+            $date_now_string = $date_now->format('Y-m-d');
+            if ($holiday == $date_now_string) {
                 foreach ($malagasy_holidays as $value_malagasy_holiday) {
                     if ($key == $value_malagasy_holiday['name']) {
                         $malagasy_holiday = $value_malagasy_holiday['traduction'];
@@ -41,7 +41,6 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-//            'date'=>$formattedDate,
             'day' => $day,
             'date' => $date,
             'year' => $year,
