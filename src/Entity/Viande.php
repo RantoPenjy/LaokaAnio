@@ -6,6 +6,7 @@ use App\Repository\ViandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ViandeRepository::class)]
 class Viande
@@ -13,12 +14,15 @@ class Viande
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('read:plat')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat'])]
     private ?int $min_price_per_person = null;
 
     /**

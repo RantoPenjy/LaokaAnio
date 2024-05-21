@@ -6,48 +6,83 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\PlatController;
 use App\Repository\PlatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
-#[ApiResource]
-#[GetCollection]
-#[Get]
-#[Post(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
-#[Patch(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
-#[Put(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
-#[Delete(security: "is_granted('IS_AUTHENTICATED_FULLY')")]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/plats/random',
+            controller: PlatController::class,
+            openapiContext: [
+                'summary' => 'Retrieve a random plat',
+                'description' => 'Retrieves a random plat based on the current day'
+            ],
+            paginationEnabled: false,
+            normalizationContext: ['groups' => ['read:plat']],
+            name: 'random',
+        ),
+        new GetCollection(
+            uriTemplate: '/viande/{id}/plats',
+            uriVariables: [
+                'id' => new Link(toProperty: 'viandes', fromClass: Viande::class, identifiers: ['id']),
+            ],
+            openapiContext: [
+                'summary' => 'Retrieve the collection of Plats resources from Viandes id',
+                'description' => 'Retrieve the collection of Plats resources from Viandes id'
+            ],
+            paginationEnabled: false,
+            normalizationContext: ['groups' => ['read:plat_from_viande']]
+        )
+    ],
+)]
+#[GetCollection(
+    normalizationContext: ['groups' => ['read_collection:plat']],
+)]
+#[Patch]
+#[Put]
+#[Delete]
 class Plat
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read_collection:plat', 'read:plat', 'read:plat_from_viande'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from_viande'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from_viande'])]
     private ?int $min_price_per_person = null;
 
     #[ORM\ManyToOne(inversedBy: 'plats')]
+    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat', 'read:plat_from_viande'])]
     private ?DayType $day_type = null;
 
     /**
      * @var Collection<int, Viande>
      */
     #[ORM\ManyToMany(targetEntity: Viande::class, inversedBy: 'plats')]
+    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat'])]
     private Collection $viandes;
 
     /**
      * @var Collection<int, NonViande>
      */
     #[ORM\ManyToMany(targetEntity: NonViande::class, inversedBy: 'plats')]
+    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat'])]
     private Collection $non_viandes;
 
     public function __construct()
