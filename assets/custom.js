@@ -7,7 +7,7 @@ jQuery(function(){
         $("#randomBtnText").hide();
         $("#showRecipeLink").hide();
         $.ajax({
-            url: window.location.origin + "/plat/random",
+            url: window.location.origin + "/api/plats/random",
             type: "GET",
             success: function (response) {
                 setTimeout(function() {
@@ -15,10 +15,10 @@ jQuery(function(){
                     $("#randomBtnSpinner").hide();
                     let result;
                     if (window.innerWidth > 580) {
-                        result = "👉 " + response + " 👈";
+                        result = "👉 " + response.name + " 👈";
                     }
                     else {
-                        result = response;
+                        result = response.name;
                     }
                     $("#randomResult").addClass('animate__animated animate__zoomIn').text(result);
                     $("#randomResult").css("opacity", 1);

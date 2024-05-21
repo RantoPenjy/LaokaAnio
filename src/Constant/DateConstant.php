@@ -135,7 +135,7 @@ class DateConstant
     private static function getPentecostDate(): \DateTime
     {
         return (clone(self::getEasterDate()))
-            ->add(new \DateInterval('P50D'));
+            ->add(new \DateInterval('P49D'));
     }
 
     private static function getAscensionDate(): \DateTime
