@@ -1,4 +1,7 @@
 import 'bootstrap/dist/js/bootstrap.min.js';
+
+import 'select2/dist/js/select2';
+import 'select2/dist/css/select2.min.css'
 /*
  * Welcome to your app's main JavaScript file!
  *

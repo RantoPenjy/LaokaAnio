@@ -24,11 +24,6 @@ class PlatType extends AbstractType
                 'class' => DayType::class,
                 'choice_label' => 'name',
                 'choice_value' => 'id',
-//                'choices' => [
-//                    'Andro tsotra' => 1,
-//                    'Alahady' => 2,
-//                    'Fety' => 3
-//                ]
             ])
             ->add('viandes', EntityType::class, [
                 'class' => Viande::class,
@@ -44,7 +39,6 @@ class PlatType extends AbstractType
                 'required' => false,
                 'multiple' => true,
             ])
-            ->add('min_price_per_person')
         ;
     }
 

@@ -66,6 +66,21 @@ class PlatController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $viandes = $plat->getViandes();
+            $nonViandes = $plat->getNonViandes();
+
+            $minPrice = 0;
+
+            foreach ($viandes as $viande) {
+                $minPrice += $viande->getMinPricePerPerson();
+            }
+
+            foreach ($nonViandes as $nonViande) {
+                $minPrice += $nonViande->getMinPricePerPerson();
+            }
+
+            $plat->setMinPricePerPerson($minPrice);
+
             $entityManager->persist($plat);
             $entityManager->flush();
 

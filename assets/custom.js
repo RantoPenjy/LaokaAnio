@@ -35,4 +35,8 @@ jQuery(function(){
     if ($(window).width() > 580) {
         console.log($("#randomResult").text())
     }
+
+    $('.form-control-select2').select2({
+        width: '100%'
+    });
 })

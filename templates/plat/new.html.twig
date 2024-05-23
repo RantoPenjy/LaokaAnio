@@ -5,11 +5,11 @@
 {% block body %}
     <div class="container d-flex justify-content-center h-100 align-items-center">
         <div>
-            <h1>Create new Plat</h1>
+            <h1>Ajouter une nouvelle plat</h1>
 
             {{ include('plat/_form.html.twig') }}
 
-            <a class="btn btn-outline-primary" href="{{ path('app_plat_index') }}">back to list</a>
+            <a class="btn btn-outline-primary w-100" href="{{ path('app_plat_index') }}">Back to list</a>
         </div>
     </div>
 {% endblock %}
