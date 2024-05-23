@@ -14,9 +14,9 @@ It had a simple display made with Bootstrap and use the DataTable to show all di
 
 ## Installation:
 
-- Clone the repository from Github:
+- Clone the repository from GitHub:
   ```bash
-  git clone https://github.com/RantoPenjy/Laoka-Anio
+  git clone https://github.com/RantoPenjy/LaokaAnio
   ```
 - Install dependencies:
   ```bash
