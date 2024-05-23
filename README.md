@@ -26,7 +26,9 @@ It had a simple display made with Bootstrap and use the DataTable to show all di
   ```bash
   npm install
   ```
-- Create a database:
+- Update your .env.local file to setup your own database
+  
+- Create the database:
   ```bash
   php bin/console doctrine:database:create
   ```
