@@ -26,7 +26,7 @@ It had a simple display made with Bootstrap and use the DataTable to show all di
   ```
 - Update your .env.local file to setup your own database
   
-- Create a database:
+- Create the database:
   ```bash
   php bin/console doctrine:database:create
   ```
