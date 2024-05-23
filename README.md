@@ -28,10 +28,6 @@ It had a simple display made with Bootstrap and use the DataTable to show all di
   ```bash
   php bin/console doctrine:database:create
   ```
-- Update database schema:
-  ```bash
-  php bin/console doctrine:schema:update --force
-  ```
 - Run database migrations:
   ```bash
   php bin/console doctrine:migrations:migrate
