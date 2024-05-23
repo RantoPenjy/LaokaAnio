@@ -4,14 +4,16 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Link;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Controller\PlatController;
+use App\Dto\PlatInput;
+use App\Form\PlatInputType;
 use App\Repository\PlatRepository;
+use App\State\Processor\PlatProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -41,7 +43,25 @@ use Symfony\Component\Serializer\Attribute\Groups;
                 'description' => 'Retrieve the collection of Plats resources from Viandes id'
             ],
             paginationEnabled: false,
-            normalizationContext: ['groups' => ['read:plat_from_viande']]
+            normalizationContext: ['groups' => ['read:plat_from']]
+        ),
+        new GetCollection(
+            uriTemplate: '/nonviande/{id}/plats',
+            uriVariables: [
+                'id' => new Link(toProperty: 'non_viandes', fromClass: NonViande::class, identifiers: ['id']),
+            ],
+            openapiContext: [
+                'summary' => 'Retrieve the collection of Plats resources from NonViandes id',
+                'description' => 'Retrieve the collection of Plats resources from non Viandes id'
+            ],
+            paginationEnabled: false,
+            normalizationContext: ['groups' => ['read:plat_from']]
+        ),
+        new Post(
+            normalizationContext: ['groups' => ['read:plat']],
+            denormalizationContext: ['groups' => ['post:plat']],
+            input: PlatInput::class,
+            processor: PlatProcessor::class
         )
     ],
 )]
@@ -56,33 +76,33 @@ class Plat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['read_collection:plat', 'read:plat', 'read:plat_from_viande'])]
+    #[Groups(['read_collection:plat', 'read:plat', 'read:plat_from'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from_viande'])]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from_viande'])]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private ?int $min_price_per_person = null;
 
     #[ORM\ManyToOne(inversedBy: 'plats')]
-    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat', 'read:plat_from_viande'])]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private ?DayType $day_type = null;
 
     /**
      * @var Collection<int, Viande>
      */
     #[ORM\ManyToMany(targetEntity: Viande::class, inversedBy: 'plats')]
-    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat'])]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private Collection $viandes;
 
     /**
      * @var Collection<int, NonViande>
      */
     #[ORM\ManyToMany(targetEntity: NonViande::class, inversedBy: 'plats')]
-    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat'])]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private Collection $non_viandes;
 
     public function __construct()

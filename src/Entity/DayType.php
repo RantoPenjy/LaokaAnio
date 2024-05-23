@@ -14,11 +14,11 @@ class DayType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('read:plat')]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['read_collection:plat'/*, 'post:plat'*/, 'read:plat', 'read:plat_from_viande'])]
+    #[Groups(['read_collection:plat', 'post:plat', 'read:plat', 'read:plat_from'])]
     private ?string $name = null;
 
     /**
